@@ -98,13 +98,18 @@
     background: var(--accent-d);
     transform: translateY(-1px);
   }
-  .btn.share svg { width: 16px; height: 16px; }
 
   /* ───── Hero ───── */
   .hero { padding: 70px 0 30px; }
   .hero-grid {
     display: grid; grid-template-columns: 1.05fr 1fr; gap: 60px; align-items: center;
   }
+  .stars-row {
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px;
+    font-size: 13px; color: var(--ink-soft);
+  }
+  .stars-row .stars { color: var(--accent); letter-spacing: 1px; }
+
   h1.display {
     font-family: 'Inter', sans-serif;
     font-weight: 800;
@@ -169,31 +174,18 @@
   .problem-pills {
     position: absolute; inset: 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 28px; z-index: 2; padding: 30px;
+    gap: 14px; z-index: 2; padding: 30px;
   }
-  .prow { text-align: center; }
   .ppill {
-    display: inline-block;
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic; font-weight: 400;
-    font-size: clamp(34px, 4.8vw, 60px);
-    line-height: 1;
-    letter-spacing: -0.01em;
-    color: white;
-    text-decoration: line-through;
-    text-decoration-color: var(--accent);
-    text-decoration-thickness: 4px;
-    text-underline-offset: 0;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 16px rgba(0,0,0,0.35);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 14px 28px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    color: var(--ink); border-radius: 999px;
+    font-weight: 600; font-size: 18px;
+    box-shadow: 0 8px 24px -8px rgba(0,0,0,0.3);
   }
-  .pcrit {
-    display: block;
-    font-family: 'Inter', sans-serif; font-weight: 500;
-    color: white; font-size: 16px;
-    opacity: 0.92;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  }
+  .ppill + .pcrit { color: white; font-size: 16px; opacity: 0.9; }
   .problem-bottom {
     margin-top: 36px; text-align: center;
   }
@@ -506,7 +498,7 @@
   /* ───── Footer ───── */
   footer { padding: 60px 0 40px; border-top: 1px solid var(--line); }
   .foot-grid {
-    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 32px;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px;
   }
   .foot-grid h5 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-soft); margin-bottom: 16px; font-weight: 600; }
   .foot-grid a { display: block; padding: 6px 0; font-size: 15px; color: var(--ink); }
@@ -552,9 +544,7 @@
     .foot-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
     .closer { padding: 60px 28px; margin: 40px 0; }
     .problem-wrap { aspect-ratio: 3/4; }
-    .ppill { font-size: 30px; margin-bottom: 6px; text-decoration-thickness: 3px; }
-    .pcrit { font-size: 14px; }
-    .problem-pills { gap: 22px; padding: 24px; }
+    .ppill { font-size: 15px; padding: 12px 22px; }
 
     /* Comparison table — mobile compact */
     .vs-wrap { padding: 0 4px; }
@@ -587,7 +577,6 @@
   .menu-toggle span {
     display: block; width: 20px; height: 2px;
     background: var(--ink); border-radius: 2px;
-    transition: transform .3s ease, opacity .3s ease;
   }
   .mobile-menu-backdrop {
     position: fixed; inset: 0; background: rgba(0,0,0,0.3);
@@ -650,7 +639,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-header">
     <a href="index.html" class="logo"><img src="B1.png" alt="Tyme Boxed" /></a>
-    <button class="menu-close" aria-label="Close menu">×</button>
+    <button class="menu-close" type="button" aria-label="Close menu">×</button>
   </div>
   <div class="mobile-menu-links">
     <a href="index.html">Home</a>
@@ -663,6 +652,10 @@
 <header class="hero">
   <div class="container hero-grid">
     <div>
+      <div class="stars-row">
+        <span class="stars">★★★★★</span>
+        <span>Early access · 50% off</span>
+      </div>
       <h1 class="display">
         Take back<br>your <span class="ital">hours.</span>
       </h1>
@@ -688,18 +681,12 @@
 
     <div class="problem-wrap reveal">
       <div class="problem-pills">
-        <div class="prow">
-          <div class="ppill">App Timers</div>
-          <div class="pcrit">One tap to dismiss.</div>
-        </div>
-        <div class="prow">
-          <div class="ppill">Deleting Apps</div>
-          <div class="pcrit">Re-downloaded by Tuesday.</div>
-        </div>
-        <div class="prow">
-          <div class="ppill">Grayscale Mode</div>
-          <div class="pcrit">You'll forget by Wednesday.</div>
-        </div>
+        <div class="ppill">App Timers</div>
+        <div class="pcrit">One tap to dismiss.</div>
+        <div class="ppill">Deleting Apps</div>
+        <div class="pcrit">Re-downloaded by Tuesday.</div>
+        <div class="ppill">Grayscale Mode</div>
+        <div class="pcrit">You'll forget by Wednesday.</div>
       </div>
     </div>
 
@@ -714,7 +701,7 @@
 <section style="background: var(--bg-warm); padding-top: 100px; padding-bottom: 100px;">
   <div class="container">
     <h2 class="section-title center">Introducing <span class="ital">Tyme Boxed.</span></h2>
-    <p class="section-sub center">A small  device that puts a physical barrier between you and the apps you can't put down.</p>
+    <p class="section-sub center">A small NFC device that puts a physical barrier between you and the apps you can't put down.</p>
 
     <div class="intro-grid">
       <div class="intro-img reveal"></div>
@@ -1193,19 +1180,15 @@
       </div>
       <div>
         <h5>Product</h5>
-        <a href="index.html">Home</a>
-        <a href="science.html">The Science</a>
+        <a href="science.html">The science</a>
         <a href="quiz.html">Is Tyme Boxed for me?</a>
-        <a href="preorder.html">Order</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
       </div>
       <div>
         <h5>Support</h5>
         <a href="support.html">Help center</a>
-      </div>
-      <div>
-        <h5>Legal</h5>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
       </div>
       <div>
         <h5>Follow</h5>

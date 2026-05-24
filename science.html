@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" href="B11.png" type="image/png">
+<link rel="apple-touch-icon" href="B11.png">
 <title>The Science — Tyme Boxed</title>
 <meta name="description" content="Why your phone wins, what it's doing to your brain, and how a six-second walk turns it all around. The neuroscience behind Tyme Boxed.">
 <meta property="og:title" content="The Science — Tyme Boxed">
@@ -47,14 +49,34 @@
     border-bottom: 1px solid rgba(0,0,0,0.04);
   }
   .nav-inner {
-    display: flex; align-items: center; justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
     padding: 16px 28px; max-width: 1200px; margin: 0 auto;
   }
-  .logo { font-family: 'Instrument Serif', serif; font-size: 26px; letter-spacing: -0.02em; }
-  .logo .dot { color: var(--accent); }
-  .nav-links { display: flex; gap: 28px; align-items: center; font-size: 15px; color: var(--ink-soft); }
+  .logo {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    line-height: 0;
+  }
+  .logo img {
+    height: 52px;
+    width: auto;
+    display: block;
+  }
+  .nav-links {
+    justify-self: center;
+    display: flex; gap: 40px; align-items: center;
+    font-size: 15px; color: var(--ink-soft); white-space: nowrap;
+  }
   .nav-links a:hover { color: var(--ink); }
-  .nav-links a.active { color: var(--ink); font-weight: 600; }
+  .nav-links a.active { color: var(--ink); font-weight: 500; }
+  .nav-actions {
+    justify-self: end;
+    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--ink); color: var(--bg);
@@ -70,15 +92,14 @@
   .btn .arrow { transition: transform .15s ease; }
   .btn:hover .arrow { transform: translateX(3px); }
   .btn.share {
-    background: linear-gradient(135deg, #D4B84E 0%, #C8A951 50%, #B89A42 100%);
-    color: #1A1A1A; font-weight: 600;
-    box-shadow: 0 2px 12px -3px rgba(200,169,81,0.45);
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 500;
     border: 0; cursor: pointer; font-family: inherit;
   }
   .btn.share:hover {
-    background: linear-gradient(135deg, #E0C65C 0%, #D4B84E 50%, #C8A951 100%);
+    background: var(--accent-d);
     transform: translateY(-1px);
-    box-shadow: 0 4px 18px -4px rgba(200,169,81,0.55);
   }
   .btn.share svg { width: 16px; height: 16px; }
 
@@ -418,9 +439,11 @@
 
     /* Nav — compact, smaller order button */
     .nav-links { display: none; }
-    .menu-toggle { display: flex; }
-    .nav-inner { padding: 12px 18px; }
-    .logo { font-size: 22px; }
+    .nav-inner {
+      display: flex; justify-content: space-between;
+      padding: 12px 18px;
+    }
+    .logo img { height: 40px; }
     .btn { padding: 9px 16px; font-size: 13px; }
 
     /* Hero — tighter spacing, smaller meta pill */
@@ -584,7 +607,7 @@
   @media (max-width: 380px) {
     .container, .narrow, .page-wrap { padding: 0 16px; }
     .nav-inner { padding: 11px 16px; }
-    .logo { font-size: 20px; }
+    .logo img { height: 36px; }
     .btn { padding: 8px 14px; font-size: 12.5px; }
     .meta-pill { font-size: 10.5px; padding: 5px 10px; }
     .meta-pill .sep { display: none; }
@@ -600,8 +623,14 @@
   }
 
   /* ───── Mobile Menu ───── */
+  @media (min-width: 881px) {
+    .menu-toggle { display: none; }
+  }
+  @media (max-width: 880px) {
+    .menu-toggle { display: flex; }
+  }
   .menu-toggle {
-    display: none; background: none; border: none; cursor: pointer;
+    background: none; border: none; cursor: pointer;
     width: 40px; height: 40px;
     flex-direction: column; justify-content: center; align-items: center; gap: 5px;
     padding: 8px; flex-shrink: 0;
@@ -645,9 +674,6 @@
   }
   .mobile-menu-links a:last-child { border-bottom: none; }
   .mobile-menu-links a:hover { color: var(--accent); }
-  .mobile-menu-cta { padding: 22px; border-top: 1px solid var(--line); }
-  .mobile-menu-cta .btn { width: 100%; justify-content: center; }
-
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
   .reveal.in { opacity: 1; transform: none; }
 </style>
@@ -656,30 +682,29 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo">Tyme<span class="dot">·</span>Boxed</a>
+    <a href="index.html" class="logo"><img src="B1.png" alt="Tyme Boxed" /></a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="science.html" class="active">The Science</a>
-      <a href="quiz.html">Take the quiz</a>
+      <a href="quiz.html">Is Tyme Boxed for me?</a>
     </div>
-    <a href="preorder.html" class="btn share">Order now <span class="arrow">↗</span></a>
-    <button class="menu-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <div class="nav-actions">
+      <a href="preorder.html" class="btn share">Order now <span class="arrow">↗</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </nav>
 
 <div class="mobile-menu-backdrop" id="menuBackdrop"></div>
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-header">
-    <a href="index.html" class="logo">Tyme<span class="dot">·</span>Boxed</a>
+    <a href="index.html" class="logo"><img src="B1.png" alt="Tyme Boxed" /></a>
     <button class="menu-close" aria-label="Close menu">×</button>
   </div>
   <div class="mobile-menu-links">
     <a href="index.html">Home</a>
     <a href="science.html">The Science</a>
     <a href="quiz.html">Is Tyme Boxed for me?</a>
-  </div>
-  <div class="mobile-menu-cta">
-    <a href="preorder.html" class="btn share">Order Now</a>
   </div>
 </div>
 
@@ -945,17 +970,17 @@
   <div class="container">
     <div class="foot-grid">
       <div>
-        <div class="logo">Tyme<span class="dot">·</span>Boxed</div>
+        <div class="logo"><img src="B1.png" alt="Tyme Boxed" /></div>
         <p class="muted" style="margin-top: 14px; font-size: 14px; max-width: 280px;">A small device for a quieter mind.</p>
         <a class="app-badge" href="https://apps.apple.com/in/app/tyme-boxed/id6759287522">
-          <img src="https://tymeboxed.app/app.png" alt="Download on the App Store">
+          <img src="app.png" alt="Download on the App Store">
         </a>
       </div>
       <div>
         <h5>Product</h5>
         <a href="index.html">Home</a>
         <a href="science.html">The Science</a>
-        <a href="quiz.html">Take the quiz</a>
+        <a href="quiz.html">Is Tyme Boxed for me?</a>
         <a href="preorder.html">Order</a>
       </div>
       <div>
