@@ -410,14 +410,20 @@
   .closer h2 {
     font-family: 'Inter', sans-serif; font-weight: 800;
     font-size: clamp(32px, 4.4vw, 52px); line-height: 1.0; letter-spacing: -0.025em;
-    margin-bottom: 12px; position: relative;
+    margin-bottom: 12px; position: relative; z-index: 1;
   }
   .closer h2 em {
     font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
     color: var(--accent);
   }
-  .closer-sub { color: rgba(255,255,255,0.75); font-size: 15px; margin-bottom: 28px; position: relative; }
-  .closer .btn { position: relative; }
+  .closer-sub { color: rgba(255,255,255,0.75); font-size: 15px; margin-bottom: 28px; position: relative; z-index: 1; }
+  .closer .btn {
+    position: relative; z-index: 2;
+    display: inline-flex;
+  }
+  #checkout { scroll-margin-top: 100px; }
+  .btn.white { background: white; color: var(--ink); }
+  .btn.white:hover { background: var(--accent); color: white; }
 
   /* ───── Footer ───── */
   footer { padding: 50px 0 40px; border-top: 1px solid var(--line); margin-top: 40px; }
@@ -605,7 +611,7 @@
     </div>
 
     <!-- Buy panel -->
-    <div class="buy" id="buy">
+    <div class="buy" id="checkout">
       <div class="buy-eyebrow">
         <span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>
         Launch price · 50% off
@@ -629,7 +635,7 @@
       </ul>
 
       <a href="#checkout" class="btn lg accent full" id="primaryCta">
-        Buy now  ₹999 
+        Buy now 
       </a>
       <div class="buy-cta-note">Secure payment · Free India shipping · 30-day money back</div>
     </div>
@@ -663,7 +669,7 @@
       </div>
       <div>
         <div class="name">Secure checkout</div>
-        <div class="detail">Razorpay encryption. Your data never sold.</div>
+        <div class="detail">Razorpay encryption.</div>
       </div>
     </div>
     <div class="trust-item">
@@ -907,10 +913,10 @@
 
 <!-- ───── CLOSING CTA ───── -->
 <div class="container">
-  <div class="closer reveal">
+  <div class="closer">
     <h2>The hours don't come back.<br><em>Start the walk.</em></h2>
     <p class="closer-sub">Order today at the launch price. Free shipping across India.</p>
-    <a href="#checkout" class="btn lg accent">Buy now  ₹999 </a>
+    <a href="#checkout" class="btn lg white">Buy now <span class="arrow">→</span></a>
   </div>
 </div>
 
