@@ -547,7 +547,6 @@
       <a href="quiz.html">Is Tyme Boxed for me?</a>
     </div>
     <div class="nav-actions">
-      <a href="preorder.html" class="btn share">Order now <span class="arrow">↗</span></a>
       <button class="menu-toggle" type="button" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -878,7 +877,7 @@
   <div class="closer">
     <h2>The hours don't come back.<br><em>Start the walk.</em></h2>
     <p class="closer-sub">Order today at the launch price. Free shipping across India.</p>
-    <a href="#buy" class="btn lg white">Buy now <span class="arrow">→</span></a>
+    <a href="#buy" id="buy-now-cta" class="btn lg white">Buy now <span class="arrow">→</span></a>
   </div>
 </div>
 
@@ -1128,5 +1127,64 @@
   }
 })();
 </script>
+
+<!-- Trigger the embedded Shopify Buy Button from the external CTA -->
+<script>
+  (function () {
+    const cta = document.getElementById('buy-now-cta');
+    const embedNode = document.getElementById('product-component-1773905360521');
+    const buyPanel = document.getElementById('buy');
+    if (!cta || !embedNode) return;
+
+    function tryClickInIframes() {
+      const iframes = embedNode.querySelectorAll('iframe');
+      for (const iframe of iframes) {
+        try {
+          const doc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);
+          if (!doc) continue;
+
+          // Prefer Shopify button classes, but fall back to text matching.
+          const direct =
+            doc.querySelector('button.shopify-buy__btn, a.shopify-buy__btn') ||
+            Array.from(doc.querySelectorAll('button, a')).find(el => {
+              const txt = (el.textContent || '').trim().toLowerCase();
+              return txt === 'buy now' || txt === 'add to cart' || txt.includes('buy now') || txt.includes('add to cart');
+            });
+
+          if (direct && typeof direct.click === 'function') {
+            direct.click();
+            return true;
+          }
+        } catch (e) {
+          // If the iframe is cross-origin, we won't be able to click into it.
+        }
+      }
+      return false;
+    }
+
+    cta.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      if (buyPanel && typeof buyPanel.scrollIntoView === 'function') {
+        buyPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // Prevent repeated clicks while we retry.
+      const prevPointer = cta.style.pointerEvents;
+      cta.style.pointerEvents = 'none';
+
+      // Retry briefly while Shopify Buy Button finishes mounting.
+      let tries = 12; // ~3 seconds total
+      const timer = setInterval(() => {
+        const clicked = tryClickInIframes();
+        if (clicked || tries-- <= 0) {
+          clearInterval(timer);
+          cta.style.pointerEvents = prevPointer;
+        }
+      }, 250);
+    });
+  })();
+</script>
+
 </body>
 </html>
