@@ -293,6 +293,58 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
     width: 100% !important;
     max-width: 100% !important;
   }
+  .shopify-buy-frame--toggle,
+  .shopify-buy__cart-toggle { display: none !important; }
+
+  /* ───── Floating cart (chat-style FAB) ───── */
+  .cart-fab {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 90;
+    width: 58px;
+    height: 58px;
+    border: none;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    box-shadow: 0 8px 28px rgba(214, 83, 43, 0.45), 0 2px 8px rgba(0,0,0,0.12);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .cart-fab.visible {
+    display: flex;
+    animation: cartFabIn .35s ease;
+  }
+  @keyframes cartFabIn {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .cart-fab:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 32px rgba(214, 83, 43, 0.5), 0 4px 12px rgba(0,0,0,0.14);
+  }
+  .cart-fab svg { width: 26px; height: 26px; }
+  .cart-fab-count {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 22px;
+    text-align: center;
+    border: 2px solid var(--bg);
+  }
 
   /* ───── TRUST STRIP ───── */
   .trust {
@@ -539,6 +591,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
     .price-save { font-size: 10px; padding: 3px 7px; }
     .trust-grid { grid-template-columns: 1fr; gap: 14px; }
     .foot-grid { grid-template-columns: 1fr; gap: 24px; }
+    .cart-fab { right: 18px; bottom: 18px; width: 54px; height: 54px; }
   }
 
   @media (min-width: 881px) { .menu-toggle { display: none; } }
@@ -943,6 +996,18 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
   </div>
 </footer>
 
+<button type="button" class="cart-fab" id="cart-fab" aria-label="Open checkout">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <path d="M6 6h15l-1.5 9h-12z"/>
+    <path d="M6 6L5 3H2"/>
+    <circle cx="9" cy="20" r="1"/>
+    <circle cx="18" cy="20" r="1"/>
+  </svg>
+  <span class="cart-fab-count" id="cart-fab-count">1</span>
+</button>
+
+<script src="cart.js"></script>
+
 <script>
   // Reveal on scroll
   const io = new IntersectionObserver((entries) => {
@@ -1061,6 +1126,18 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
             buttonDestination: 'cart',
             text: {
               button: 'Buy now'
+            },
+            events: {
+              addVariantToCart: function (product) {
+                setTimeout(function () {
+                  try {
+                    var cart = product && product.cart;
+                    var qty = cart && cart.model && cart.model.lineItemCount;
+                    var cartId = (cart && cart.model && cart.model.id) || (cart && cart.id);
+                    if (window.tymeBoxedCartSync) window.tymeBoxedCartSync(qty || 1, cartId);
+                  } catch (e) {}
+                }, 400);
+              }
             }
           },
           productSet: {
@@ -1107,7 +1184,16 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
           },
           option: {},
           cart: {
-            popup: true,
+            popup: false,
+            events: {
+              updateItemQuantity: function (cart) {
+                try {
+                  var qty = cart && cart.model && cart.model.lineItemCount;
+                  var cartId = (cart && cart.model && cart.model.id) || (cart && cart.id);
+                  if (window.tymeBoxedCartSync) window.tymeBoxedCartSync(qty || 0, cartId);
+                } catch (e) {}
+              }
+            },
             styles: {
               button: {
                 'font-weight': '600',
@@ -1146,6 +1232,20 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
           }
         },
       });
+
+      setTimeout(function () {
+        try {
+          var products = ui.components.product;
+          if (!products || !products.length) return;
+          var cart = products[0].cart;
+          if (!cart || !cart.model) return;
+          var qty = cart.model.lineItemCount;
+          var cartId = cart.model.id || cart.id;
+          if (qty > 0 && window.tymeBoxedCartSync) {
+            window.tymeBoxedCartSync(qty, cartId);
+          }
+        } catch (e) {}
+      }, 1200);
     });
   }
 })();
