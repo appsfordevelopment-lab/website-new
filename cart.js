@@ -2,20 +2,37 @@
   const SHOPIFY_DOMAIN = '1q25jg-gp.myshopify.com';
   const STOREFRONT_TOKEN = 'b967500b16539e0ad66d6181ab3d425f';
   const VARIANT_GID = 'gid://shopify/ProductVariant/48125253550250';
-  const VARIANT_ID = '48125253550250';
   const CART_QTY_KEY = 'tymeboxed_cart_qty';
   const CART_ID_KEY = 'tymeboxed_cart_id';
+  const OPEN_CART_KEY = 'tymeboxed_open_cart';
 
   const fab = document.getElementById('cart-fab');
   const fabCount = document.getElementById('cart-fab-count');
   if (!fab || !fabCount) return;
 
+  function isCheckoutPage() {
+    const path = window.location.pathname;
+    return path.endsWith('preorder.html') || path.endsWith('/preorder');
+  }
+
   function getQty() {
     return Math.max(0, parseInt(localStorage.getItem(CART_QTY_KEY) || '0', 10) || 0);
   }
 
+  function getCartQtyFromModel(cart) {
+    if (!cart || !cart.model) return 0;
+    var m = cart.model;
+    if (typeof m.totalQuantity === 'number' && m.totalQuantity > 0) return m.totalQuantity;
+    if (m.lineItems && m.lineItems.length) {
+      return m.lineItems.reduce(function (sum, item) {
+        return sum + (item.quantity || 0);
+      }, 0);
+    }
+    return m.lineItemCount || 0;
+  }
+
   function updateFab(qty) {
-    const count = Math.max(0, parseInt(qty, 10) || 0);
+    var count = Math.max(0, parseInt(qty, 10) || 0);
     if (count > 0) {
       localStorage.setItem(CART_QTY_KEY, String(count));
       fabCount.textContent = String(count);
@@ -28,7 +45,7 @@
   }
 
   function syncFabFromStorage() {
-    const qty = getQty();
+    var qty = getQty();
     if (qty > 0) {
       fabCount.textContent = String(qty);
       fab.classList.add('visible');
@@ -38,7 +55,7 @@
   }
 
   async function shopifyGql(query, variables) {
-    const res = await fetch('https://' + SHOPIFY_DOMAIN + '/api/2024-10/graphql.json', {
+    var res = await fetch('https://' + SHOPIFY_DOMAIN + '/api/2024-10/graphql.json', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,67 +66,94 @@
     return res.json();
   }
 
-  async function resolveCheckoutUrl() {
-    const cartId = localStorage.getItem(CART_ID_KEY);
-    if (cartId) {
-      const result = await shopifyGql(
+  async function refreshCartFromShopify() {
+    var cartId = localStorage.getItem(CART_ID_KEY);
+    if (!cartId) return;
+    try {
+      var result = await shopifyGql(
         'query($id: ID!) { cart(id: $id) { id checkoutUrl totalQuantity } }',
         { id: cartId }
       );
-      const cart = result.data && result.data.cart;
-      if (cart && cart.checkoutUrl && cart.totalQuantity > 0) {
-        updateFab(cart.totalQuantity);
+      var cart = result.data && result.data.cart;
+      if (cart && cart.totalQuantity > 0) {
         localStorage.setItem(CART_ID_KEY, cart.id);
-        return cart.checkoutUrl;
+        updateFab(cart.totalQuantity);
+      } else if (!cart || cart.totalQuantity === 0) {
+        updateFab(0);
       }
-    }
-
-    const qty = Math.max(1, getQty());
-    const created = await shopifyGql(
-      'mutation($input: CartInput!) { cartCreate(input: $input) { cart { id checkoutUrl totalQuantity } userErrors { message } } }',
-      { input: { lines: [{ merchandiseId: VARIANT_GID, quantity: qty }] } }
-    );
-    const payload = created.data && created.data.cartCreate;
-    const cart = payload && payload.cart;
-    if (cart && cart.checkoutUrl) {
-      localStorage.setItem(CART_ID_KEY, cart.id);
-      updateFab(cart.totalQuantity || qty);
-      return cart.checkoutUrl;
-    }
-
-    return null;
+    } catch (e) {}
   }
 
-  function permalinkCheckout(qty) {
-    return 'https://' + SHOPIFY_DOMAIN + '/cart/add?id=' + VARIANT_ID +
-      '&quantity=' + Math.max(1, qty) + '&return_to=/checkout';
+  function openShopifyCartDrawer() {
+    if (window.tymeBoxedOpenCart && window.tymeBoxedOpenCart()) return true;
+    var toggle = document.querySelector('.shopify-buy__cart-toggle, .shopify-buy-frame--toggle');
+    if (toggle) {
+      toggle.click();
+      return true;
+    }
+    return false;
   }
 
-  async function goToCheckout() {
+  function openShopifyCartDrawerWithRetry(done) {
+    var tries = 25;
+    var timer = setInterval(function () {
+      if (openShopifyCartDrawer()) {
+        clearInterval(timer);
+        if (done) done(true);
+      } else if (tries-- <= 0) {
+        clearInterval(timer);
+        if (done) done(false);
+      }
+    }, 200);
+  }
+
+  function openCartDrawer() {
     if (getQty() < 1) return;
-    fab.disabled = true;
-    try {
-      const url = await resolveCheckoutUrl();
-      window.location.assign(url || permalinkCheckout(getQty()));
-    } catch (e) {
-      window.location.assign(permalinkCheckout(getQty()));
-    } finally {
-      fab.disabled = false;
+
+    if (isCheckoutPage()) {
+      openShopifyCartDrawerWithRetry(function (opened) {
+        if (!opened) {
+          var buy = document.getElementById('buy');
+          if (buy) buy.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+      return;
     }
+
+    sessionStorage.setItem(OPEN_CART_KEY, '1');
+    window.location.assign('preorder.html');
   }
 
   window.tymeBoxedCartSync = function (qty, cartId) {
-    const count = Math.max(0, parseInt(qty, 10) || 0);
+    var count = Math.max(0, parseInt(qty, 10) || 0);
     if (cartId) localStorage.setItem(CART_ID_KEY, cartId);
     updateFab(count);
   };
 
-  fab.addEventListener('click', goToCheckout);
+  window.tymeBoxedGetCartQty = getCartQtyFromModel;
+
+  window.tymeBoxedSyncFromCart = function (cart) {
+    var qty = getCartQtyFromModel(cart);
+    var cartId = (cart && cart.model && cart.model.id) || (cart && cart.id);
+    if (qty > 0) window.tymeBoxedCartSync(qty, cartId);
+  };
+
+  window.tymeBoxedSyncFromProduct = function (product) {
+    if (product && product.cart) window.tymeBoxedSyncFromCart(product.cart);
+  };
+
+  window.tymeBoxedOpenCartRetry = openShopifyCartDrawerWithRetry;
+
+  fab.addEventListener('click', openCartDrawer);
 
   window.addEventListener('storage', function (e) {
     if (e.key === CART_QTY_KEY || e.key === CART_ID_KEY) syncFabFromStorage();
   });
-  window.addEventListener('pageshow', syncFabFromStorage);
+  window.addEventListener('pageshow', function () {
+    syncFabFromStorage();
+    refreshCartFromShopify();
+  });
 
   syncFabFromStorage();
+  refreshCartFromShopify();
 })();
