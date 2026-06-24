@@ -110,6 +110,8 @@
   function openCartDrawer() {
     if (getQty() < 1) return;
 
+    if (window.tymeBoxedTrackInitiateCheckout) window.tymeBoxedTrackInitiateCheckout();
+
     if (isCheckoutPage()) {
       openShopifyCartDrawerWithRetry(function (opened) {
         if (!opened) {

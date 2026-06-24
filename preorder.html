@@ -956,6 +956,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
   <span class="cart-fab-count" id="cart-fab-count">1</span>
 </button>
 
+<script src="meta-checkout.js"></script>
 <script src="cart.js"></script>
 
 <script>
@@ -1079,6 +1080,10 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
             },
             events: {
               addVariantToCart: function (product) {
+                if (!window._tymeBoxedCtaCheckoutTracked) {
+                  if (window.tymeBoxedTrackInitiateCheckout) window.tymeBoxedTrackInitiateCheckout();
+                }
+                window._tymeBoxedCtaCheckoutTracked = false;
                 function sync() {
                   if (window.tymeBoxedSyncFromProduct) window.tymeBoxedSyncFromProduct(product);
                 }
@@ -1133,6 +1138,9 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
           cart: {
             popup: true,
             events: {
+              openCheckout: function (cart) {
+                if (window.tymeBoxedTrackInitiateCheckout) window.tymeBoxedTrackInitiateCheckout();
+              },
               updateItemQuantity: function (cart) {
                 if (window.tymeBoxedSyncFromCart) window.tymeBoxedSyncFromCart(cart);
               }
@@ -1247,6 +1255,9 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
 
     cta.addEventListener('click', (e) => {
       e.preventDefault();
+
+      window._tymeBoxedCtaCheckoutTracked = true;
+      if (window.tymeBoxedTrackInitiateCheckout) window.tymeBoxedTrackInitiateCheckout();
 
       if (buyPanel && typeof buyPanel.scrollIntoView === 'function') {
         buyPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });

@@ -1254,9 +1254,17 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
   <span class="cart-fab-count" id="cart-fab-count">1</span>
 </button>
 
+<script src="meta-checkout.js"></script>
 <script src="cart.js"></script>
 
 <script>
+  // Meta Pixel InitiateCheckout — preorder / purchase links (capture, before navigation)
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href*="preorder"]');
+    if (!link) return;
+    if (window.tymeBoxedTrackInitiateCheckout) window.tymeBoxedTrackInitiateCheckout();
+  }, true);
+
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
