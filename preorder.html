@@ -635,7 +635,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
       </ul>
 
       <div class="shopify-buy-wrap">
-        <div id='product-component-1782537260980'></div>
+        <div id='product-component-1783002794506'></div>
       </div>
 
     </div>
@@ -1038,7 +1038,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
     ShopifyBuy.UI.onReady(client).then(function (ui) {
       ui.createComponent('product', {
         id: '15084586893682',
-        node: document.getElementById('product-component-1782537260980'),
+        node: document.getElementById('product-component-1783002794506'),
         moneyFormat: 'Rs.%20%7B%7Bamount%7D%7D',
         options: {
           product: {
@@ -1058,25 +1058,30 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
               button: {
                 'font-family': 'Inter, system-ui, sans-serif',
                 'font-weight': '600',
-                'font-size': '17px',
+                'font-size': '16px',
                 'width': '100%',
                 ':hover': {
-                  'background-color': '#B8431F'
+                  'background-color': '#c14b26'
                 },
-                'background-color': '#D6532B',
+                'background-color': '#d6532a',
                 ':focus': {
-                  'background-color': '#B8431F'
+                  'background-color': '#c14b26'
                 },
-                'border-radius': '999px',
-                'padding-top': '18px',
-                'padding-bottom': '18px',
+                'border-radius': '23px',
+                'padding-top': '16px',
+                'padding-bottom': '16px',
                 'padding-left': '1.5rem',
                 'padding-right': '1.5rem'
+              },
+              quantityInput: {
+                'font-size': '16px',
+                'padding-top': '16px',
+                'padding-bottom': '16px'
               }
             },
             buttonDestination: 'cart',
             text: {
-              button: 'Buy now'
+              button: 'Add to cart'
             },
             events: {
               addVariantToCart: function (product) {
@@ -1084,11 +1089,13 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
                   if (window.tymeBoxedTrackInitiateCheckout) window.tymeBoxedTrackInitiateCheckout();
                 }
                 window._tymeBoxedCtaCheckoutTracked = false;
+                var cartId = product.cart && product.cart.model && product.cart.model.id;
+                var prevQty = Math.max(0, parseInt(localStorage.getItem('tymeboxed_cart_qty') || '0', 10) || 0);
+                if (window.tymeBoxedCartSync) window.tymeBoxedCartSync(prevQty + 1, cartId);
                 function sync() {
                   if (window.tymeBoxedSyncFromProduct) window.tymeBoxedSyncFromProduct(product);
                 }
-                setTimeout(sync, 300);
-                setTimeout(sync, 900);
+                [300, 900, 1500, 2500].forEach(function (ms) { setTimeout(sync, ms); });
               }
             }
           },
@@ -1118,16 +1125,24 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
               },
               button: {
                 'font-weight': '600',
+                'font-size': '16px',
+                'padding-top': '16px',
+                'padding-bottom': '16px',
                 ':hover': {
-                  'background-color': '#B8431F'
+                  'background-color': '#c14b26'
                 },
-                'background-color': '#D6532B',
+                'background-color': '#d6532a',
                 ':focus': {
-                  'background-color': '#B8431F'
+                  'background-color': '#c14b26'
                 },
-                'border-radius': '999px',
-                'padding-left': '68px',
-                'padding-right': '68px'
+                'border-radius': '23px',
+                'padding-left': '92px',
+                'padding-right': '92px'
+              },
+              quantityInput: {
+                'font-size': '16px',
+                'padding-top': '16px',
+                'padding-bottom': '16px'
               }
             },
             text: {
@@ -1138,24 +1153,31 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
           cart: {
             popup: true,
             events: {
+              afterInit: function (cart) {
+                if (window.tymeBoxedSyncFromCart) window.tymeBoxedSyncFromCart(cart);
+              },
               openCheckout: function (cart) {
                 if (window.tymeBoxedTrackInitiateCheckout) window.tymeBoxedTrackInitiateCheckout();
               },
               updateItemQuantity: function (cart) {
-                if (window.tymeBoxedSyncFromCart) window.tymeBoxedSyncFromCart(cart);
+                if (window.tymeBoxedSyncFromCartLater) window.tymeBoxedSyncFromCartLater(cart);
+                else if (window.tymeBoxedSyncFromCart) window.tymeBoxedSyncFromCart(cart);
               }
             },
             styles: {
               button: {
                 'font-weight': '600',
+                'font-size': '16px',
+                'padding-top': '16px',
+                'padding-bottom': '16px',
                 ':hover': {
-                  'background-color': '#B8431F'
+                  'background-color': '#c14b26'
                 },
-                'background-color': '#D6532B',
+                'background-color': '#d6532a',
                 ':focus': {
-                  'background-color': '#B8431F'
+                  'background-color': '#c14b26'
                 },
-                'border-radius': '999px'
+                'border-radius': '23px'
               }
             },
             text: {
@@ -1171,13 +1193,16 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
             styles: {
               toggle: {
                 'font-weight': '600',
-                'background-color': '#D6532B',
+                'background-color': '#d6532a',
                 ':hover': {
-                  'background-color': '#B8431F'
+                  'background-color': '#c14b26'
                 },
                 ':focus': {
-                  'background-color': '#B8431F'
+                  'background-color': '#c14b26'
                 }
+              },
+              count: {
+                'font-size': '16px'
               }
             }
           }
@@ -1223,7 +1248,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
 <script>
   (function () {
     const cta = document.getElementById('buy-now-cta');
-    const embedNode = document.getElementById('product-component-1782537260980');
+    const embedNode = document.getElementById('product-component-1783002794506');
     const buyPanel = document.getElementById('buy');
     if (!cta || !embedNode) return;
 

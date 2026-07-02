@@ -1,7 +1,6 @@
 (function () {
-  const SHOPIFY_DOMAIN = '1q25jg-gp.myshopify.com';
-  const STOREFRONT_TOKEN = 'b967500b16539e0ad66d6181ab3d425f';
-  const VARIANT_GID = 'gid://shopify/ProductVariant/48125253550250';
+  const SHOPIFY_DOMAIN = 'hi2ieu-nj.myshopify.com';
+  const STOREFRONT_TOKEN = '86cad910717ebd41d100eb08dc7c66e0';
   const CART_QTY_KEY = 'tymeboxed_cart_qty';
   const CART_ID_KEY = 'tymeboxed_cart_id';
   const OPEN_CART_KEY = 'tymeboxed_open_cart';
@@ -20,15 +19,16 @@
   }
 
   function getCartQtyFromModel(cart) {
-    if (!cart || !cart.model) return 0;
-    var m = cart.model;
+    if (!cart) return 0;
+    var m = cart.model || cart;
     if (typeof m.totalQuantity === 'number' && m.totalQuantity > 0) return m.totalQuantity;
     if (m.lineItems && m.lineItems.length) {
       return m.lineItems.reduce(function (sum, item) {
         return sum + (item.quantity || 0);
       }, 0);
     }
-    return m.lineItemCount || 0;
+    if (typeof m.lineItemCount === 'number' && m.lineItemCount > 0) return m.lineItemCount;
+    return 0;
   }
 
   function updateFab(qty) {
@@ -78,7 +78,7 @@
       if (cart && cart.totalQuantity > 0) {
         localStorage.setItem(CART_ID_KEY, cart.id);
         updateFab(cart.totalQuantity);
-      } else if (!cart || cart.totalQuantity === 0) {
+      } else if (result.data) {
         updateFab(0);
       }
     } catch (e) {}
@@ -137,7 +137,22 @@
   window.tymeBoxedSyncFromCart = function (cart) {
     var qty = getCartQtyFromModel(cart);
     var cartId = (cart && cart.model && cart.model.id) || (cart && cart.id);
-    if (qty > 0) window.tymeBoxedCartSync(qty, cartId);
+    if (qty > 0) {
+      window.tymeBoxedCartSync(qty, cartId);
+    } else if (cart) {
+      window.tymeBoxedCartSync(0);
+    }
+  };
+
+  // Buy-button fires updateItemQuantity before cart.model is updated,
+  // so re-read the model after the network update settles.
+  window.tymeBoxedSyncFromCartLater = function (cart) {
+    window.tymeBoxedSyncFromCart(cart);
+    [400, 1200, 2500].forEach(function (delay) {
+      setTimeout(function () {
+        window.tymeBoxedSyncFromCart(cart);
+      }, delay);
+    });
   };
 
   window.tymeBoxedSyncFromProduct = function (product) {
