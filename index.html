@@ -18,8 +18,8 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
 /></noscript>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<link rel="icon" href="B11.png" type="image/png">
-<link rel="apple-touch-icon" href="B11.png">
+<link rel="icon" href="images/B11.png" type="image/png">
+<link rel="apple-touch-icon" href="images/B11.png">
 <title>Tyme Boxed-Take back your hours.</title>
 <meta name="description" content="The physical device that locks distracting apps from your phone. ₹999 one-time. No subscription.">
 <meta property="og:title" content="Tyme Boxed — Take back your hours.">
@@ -152,7 +152,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
 
   .hero-img {
     position: relative; aspect-ratio: 4/5;
-    background: var(--bg-warm) url('main.jpeg') center/cover;
+    background: var(--bg-warm) url('images/main.jpeg') center/cover;
     border-radius: 24px; overflow: hidden;
     box-shadow: 0 30px 80px -30px rgba(0,0,0,0.25);
   }
@@ -181,7 +181,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
     border-radius: 28px; overflow: hidden; position: relative;
     aspect-ratio: 16/8;
     background-color: #2a2520;
-    background-image: url('main.jpeg');
+    background-image: url('images/main.jpeg');
     background-size: cover;
     background-position: center 30%;
     box-shadow: 0 30px 80px -30px rgba(0,0,0,0.3);
@@ -239,7 +239,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
   }
   .intro-img {
     aspect-ratio: 1; border-radius: 28px; overflow: hidden;
-    background: var(--bg-warm) url('Device.jpeg') center/cover;
+    background: var(--bg-warm) url('images/Introducing.png') center/cover;
     box-shadow: 0 30px 80px -30px rgba(0,0,0,0.25);
   }
   .intro-features {
@@ -257,17 +257,20 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
   .showcase {
     margin-top: 50px;
     border-radius: 32px; overflow: hidden;
-    background: var(--bg-warm) url('Tab.jpeg') center/cover;
+    background: var(--bg-warm) url('images/couch.png') center/cover;
     aspect-ratio: 16/9;
     position: relative;
     box-shadow: 0 40px 100px -40px rgba(0,0,0,0.3);
   }
   .showcase::after {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%);
+    background:
+      linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 40%, transparent 70%),
+      linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.5) 100%);
   }
   .showcase-cap {
-    position: absolute; bottom: 32px; left: 36px; right: 36px;
+    position: absolute; bottom: 40px; top: auto; transform: none;
+    left: 44px; right: auto; max-width: min(52%, 560px);
     color: white; z-index: 2;
   }
   .showcase-cap h3 {
@@ -571,6 +574,8 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
     .use-card h4 { font-size: 17px; }
     .use-card p { font-size: 12px; }
     .showcase { aspect-ratio: 4/5; }
+    .showcase::after { background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.6) 100%); }
+    .showcase-cap { top: auto; bottom: 28px; transform: none; left: 28px; right: 28px; max-width: none; }
     .pricing-wrap { grid-template-columns: 1fr; gap: 32px; }
     .price-num { font-size: 64px; }
     .price-card { padding: 32px; }
@@ -658,7 +663,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo"><img src="B1.png" alt="Tyme Boxed" /></a>
+    <a href="index.html" class="logo"><img src="images/B1.png" alt="Tyme Boxed" /></a>
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
       <a href="science.html">The Science</a>
@@ -674,7 +679,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
 <div class="mobile-menu-backdrop" id="menuBackdrop"></div>
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-header">
-    <a href="index.html" class="logo"><img src="B1.png" alt="Tyme Boxed" /></a>
+    <a href="index.html" class="logo"><img src="images/B1.png" alt="Tyme Boxed" /></a>
     <button class="menu-close" aria-label="Close menu">×</button>
   </div>
   <div class="mobile-menu-links">
@@ -779,7 +784,7 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
     <div class="showcase reveal">
       <div class="showcase-cap">
         <h3>The unlock you can't tap from the couch.</h3>
-        <p>Start your focus session in the app. Walk to the device to unlock. That walk is the whole trick.</p>
+        <p>Start your focus session in the app.<br/> Walk to the device to unlock. <br/> walk is the whole trick.</p>
       </div>
     </div>
   </div>
@@ -1210,10 +1215,10 @@ src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
   <div class="container">
     <div class="foot-grid">
       <div>
-        <div class="logo"><img src="B1.png" alt="Tyme Boxed" /></div>
+        <div class="logo"><img src="images/B1.png" alt="Tyme Boxed" /></div>
         <p class="muted" style="margin-top: 14px; font-size: 14px; max-width: 280px;">A small device for a quieter mind.</p>
         <a class="app-badge" href="https://apps.apple.com/in/app/tyme-boxed/id6759287522">
-          <img src="app.png" alt="Download on the App Store">
+          <img src="images/app.png" alt="Download on the App Store">
         </a>
       </div>
       <div>
