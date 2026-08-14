@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '36986414434290717');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=36986414434290717&ev=PageView&noscript=1"
+/></noscript>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" href="../images/B11.png" type="image/png">
+<link rel="apple-touch-icon" href="../images/B11.png">
+<title>Your Profile & Account - Tyme Boxed</title>
+<meta name="description" content="Manage your Tyme Boxed profile: see what your account holds, update your details in the app, request a copy of your data, or delete your account.">
+<link rel="canonical" href="https://tymeboxed.app/profile/">
+<link rel="preconnect" href="https://www.clarity.ms">
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window,document,"clarity","script","w3uyp057u9");
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../cart-fab.css">
+<style>
+  :root {
+    --bg:        #F4EFE6;
+    --bg-warm:   #EDE6D8;
+    --bg-card:   #FBF8F2;
+    --ink:       #141414;
+    --ink-soft:  #5C5752;
+    --line:      #E0D8C7;
+    --accent:    #D6532B;
+    --accent-d:  #B8431F;
+    --accent-soft: rgba(214,83,43,0.08);
+    --green:     #2F6B3D;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 17px; line-height: 1.55;
+    overflow-x: clip;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+  .narrow { max-width: 920px; margin: 0 auto; padding: 0 28px; }
+  a { color: inherit; text-decoration: none; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(244,239,230,0.85);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .nav-inner {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; padding: 16px 28px; max-width: 1200px; margin: 0 auto;
+  }
+  .logo { justify-self: start; display: inline-flex; align-items: center; flex-shrink: 0; line-height: 0; }
+  .logo img { height: 52px; width: auto; display: block; }
+  .nav-links {
+    justify-self: center;
+    display: flex; gap: 40px; align-items: center;
+    font-size: 15px; color: var(--ink-soft); white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--ink); font-weight: 500; }
+  .nav-actions { justify-self: end; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--ink); color: var(--bg);
+    padding: 12px 22px; border-radius: 999px;
+    font-weight: 500; font-size: 15px;
+    transition: transform .15s, background .15s;
+  }
+  .btn:hover { background: var(--accent); transform: translateY(-1px); }
+  .btn.lg { padding: 16px 28px; font-size: 16px; }
+  .btn.accent { background: var(--accent); }
+  .btn.accent:hover { background: var(--accent-d); }
+  .btn.outline { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn.outline:hover { background: var(--ink); color: var(--bg); }
+  .btn.share {
+    background: var(--accent); color: var(--bg); font-weight: 500;
+    border: 0; cursor: pointer; font-family: inherit;
+  }
+  .btn.share:hover { background: var(--accent-d); transform: translateY(-1px); }
+
+  /* Hero */
+  .hero { padding: 70px 0 30px; text-align: center; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 14px;
+  }
+  h1.display {
+    font-family: 'Inter', sans-serif; font-weight: 800;
+    font-size: clamp(44px, 6vw, 72px);
+    line-height: 1.0; letter-spacing: -0.035em;
+    margin: 0 auto 18px; max-width: 800px;
+  }
+  h1.display .ital {
+    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+    color: var(--accent); letter-spacing: -0.02em;
+  }
+  .hero-sub { font-size: 18px; color: var(--ink-soft); max-width: 600px; margin: 0 auto; }
+
+  /* Open-in-app panel */
+  .app-panel {
+    max-width: 720px; margin: 40px auto 0;
+    background: var(--ink); color: var(--bg);
+    border-radius: 28px; padding: 40px;
+    position: relative; overflow: hidden; text-align: left;
+  }
+  .app-panel::before {
+    content: ''; position: absolute; right: 0; top: 0;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: var(--accent); opacity: 0.18; filter: blur(20px);
+    transform: translate(70px, -70px); pointer-events: none;
+  }
+  .app-panel .lbl {
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 10px; position: relative;
+  }
+  .app-panel h2 {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 22px; letter-spacing: -0.01em; margin-bottom: 8px; position: relative;
+  }
+  .app-panel .big {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: clamp(28px, 4vw, 40px);
+    color: white; line-height: 1.12; letter-spacing: -0.01em;
+    display: block; margin: 12px 0 14px; position: relative;
+  }
+  .app-panel .response { color: rgba(255,255,255,0.7); font-size: 14px; position: relative; }
+  .panel-actions { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; position: relative; }
+  .panel-actions .btn { background: white; color: var(--ink); }
+  .panel-actions .btn:hover { background: var(--accent); color: white; }
+  .panel-actions .btn.outline { background: transparent; color: white; border-color: rgba(255,255,255,0.4); }
+  .panel-actions .btn.outline:hover { background: white; color: var(--ink); border-color: white; }
+
+  /* Sections */
+  section { padding: 70px 0; }
+  .section-head { text-align: left; margin-bottom: 36px; }
+  h2.section-title {
+    font-family: 'Inter', sans-serif; font-weight: 800;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.0; letter-spacing: -0.025em;
+  }
+  h2.section-title .ital {
+    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+    color: var(--accent); letter-spacing: -0.02em;
+  }
+  .section-sub { margin-top: 12px; color: var(--ink-soft); font-size: 16px; max-width: 620px; }
+
+  /* Data cards */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card {
+    background: var(--bg-card); border: 1px solid var(--line);
+    border-radius: 22px; padding: 28px;
+    transition: transform .25s, border-color .15s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--ink-soft); }
+  .card .ic {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--accent-soft); color: var(--accent);
+    display: grid; place-items: center; margin-bottom: 16px;
+  }
+  .card h3 {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 18px; letter-spacing: -0.01em; margin-bottom: 8px;
+  }
+  .card p { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+  .card .hint {
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line);
+    font-size: 12.5px; color: var(--ink); font-weight: 500;
+    display: flex; gap: 6px; align-items: center;
+  }
+  .card .hint svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+  .card .hint.never svg { color: var(--green); }
+
+  /* Steps */
+  .steps { display: grid; gap: 12px; margin-top: 28px; }
+  .step {
+    background: var(--bg-card); border: 1px solid var(--line);
+    border-radius: 18px; padding: 22px 24px;
+    display: grid; grid-template-columns: 40px 1fr; gap: 18px; align-items: start;
+  }
+  .step .num {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--ink); color: var(--bg);
+    display: grid; place-items: center;
+    font-size: 14px; font-weight: 700;
+  }
+  .step h4 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+  .step p { font-size: 14px; color: var(--ink-soft); }
+
+  /* Action rows (export / delete) */
+  .actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+  .action {
+    background: var(--bg-card); border: 1px solid var(--line);
+    border-radius: 22px; padding: 28px;
+    display: flex; flex-direction: column;
+  }
+  .action.danger { border-color: rgba(214,83,43,0.35); }
+  .action .tag {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 700; color: var(--ink-soft); margin-bottom: 12px;
+  }
+  .action.danger .tag { color: var(--accent); }
+  .action h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 20px; margin-bottom: 10px; letter-spacing: -0.01em; }
+  .action p { font-size: 14px; color: var(--ink-soft); }
+  .action ul { margin: 14px 0 0 18px; }
+  .action li { font-size: 14px; color: var(--ink-soft); padding: 3px 0; }
+  .action .cta { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .action .fine { font-size: 12.5px; color: var(--ink-soft); margin-top: 10px; }
+
+  /* Helpful links */
+  .links-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-top: 28px; }
+  .link-card {
+    background: var(--bg-card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 22px;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: transform .2s, border-color .15s;
+  }
+  .link-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .link-card .ic {
+    width: 32px; height: 32px; border-radius: 9px;
+    background: var(--bg-warm); display: grid; place-items: center;
+    color: var(--ink); margin-bottom: 4px;
+  }
+  .link-card h4 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; }
+  .link-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.45; }
+  .link-card .go { font-size: 12.5px; color: var(--accent); margin-top: 4px; }
+
+  /* Footer */
+  footer { padding: 60px 0 40px; border-top: 1px solid var(--line); margin-top: 60px; }
+  .foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 32px; }
+  .foot-grid h5 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-soft); margin-bottom: 16px; font-weight: 600; }
+  .foot-grid a { display: block; padding: 6px 0; font-size: 15px; color: var(--ink); }
+  .foot-grid a:hover { color: var(--accent); }
+  .foot-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--ink-soft); flex-wrap: wrap; gap: 12px; }
+  .app-badge { display: inline-block; margin-top: 16px; }
+  .app-badge img { height: 44px; display: block; }
+  .muted { color: var(--ink-soft); }
+
+  @media (max-width: 880px) {
+    .container, .narrow { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-inner { display: flex; justify-content: space-between; padding: 12px 18px; }
+    .logo img { height: 40px; }
+    .btn { padding: 9px 16px; font-size: 13px; }
+    .btn.lg { padding: 13px 20px; font-size: 14px; }
+
+    .hero { padding: 40px 0 22px; }
+    h1.display { font-size: 38px; }
+    .hero-sub { font-size: 15px; }
+    .app-panel { margin: 28px 20px 0; padding: 28px 22px; border-radius: 22px; }
+    .app-panel h2 { font-size: 18px; }
+    .app-panel .big { font-size: 25px; line-height: 1.15; }
+    .app-panel .response { font-size: 13px; }
+    .panel-actions .btn { padding: 11px 18px; font-size: 13px; }
+
+    section { padding: 50px 0; }
+    h2.section-title { font-size: 28px; }
+    .section-sub { font-size: 14px; }
+    .cards { grid-template-columns: 1fr; gap: 12px; }
+    .card { padding: 22px; border-radius: 18px; }
+    .card h3 { font-size: 16px; }
+    .step { padding: 18px; border-radius: 16px; grid-template-columns: 34px 1fr; gap: 14px; }
+    .actions-grid { grid-template-columns: 1fr; }
+    .action { padding: 22px; border-radius: 18px; }
+
+    .links-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .link-card { padding: 18px; border-radius: 14px; }
+
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  }
+  @media (max-width: 380px) {
+    .container, .narrow { padding: 0 16px; }
+    .nav-inner { padding: 11px 16px; }
+    h1.display { font-size: 32px; }
+    .app-panel .big { font-size: 22px; }
+    .links-row { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  @media (min-width: 881px) { .menu-toggle { display: none; } }
+  @media (max-width: 880px) { .menu-toggle { display: flex; } }
+  .menu-toggle { background: none; border: none; cursor: pointer; width: 40px; height: 40px; flex-direction: column; justify-content: center; align-items: center; gap: 5px; padding: 8px; flex-shrink: 0; }
+  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--ink); border-radius: 2px; }
+  .mobile-menu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 99; opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+  .mobile-menu-backdrop.open { opacity: 1; pointer-events: auto; }
+  .mobile-menu { position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 82vw); background: var(--bg); z-index: 100; transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column; box-shadow: -10px 0 40px rgba(0,0,0,0.08); }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; border-bottom: 1px solid var(--line); }
+  .menu-close { background: none; border: none; cursor: pointer; font-size: 28px; color: var(--ink); width: 40px; height: 40px; display: grid; place-items: center; }
+  .mobile-menu-links { padding: 32px 22px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .mobile-menu-links a { font-size: 18px; font-weight: 500; padding: 14px 0; color: var(--ink); border-bottom: 1px solid var(--line); transition: color .15s; }
+  .mobile-menu-links a:last-child { border-bottom: none; }
+  .mobile-menu-links a:hover { color: var(--accent); }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo"><img src="../images/B1.png" alt="Tyme Boxed" /></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../science.html">The Science</a>
+      <a href="../quiz.html">Is Tyme Boxed for me?</a>
+    </div>
+    <div class="nav-actions">
+      <a href="../preorder.html" class="btn share">Order now <span class="arrow">↗</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu-backdrop" id="menuBackdrop"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <a href="../index.html" class="logo"><img src="../images/B1.png" alt="Tyme Boxed" /></a>
+    <button class="menu-close" aria-label="Close menu">×</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="../index.html">Home</a>
+    <a href="../science.html">The Science</a>
+    <a href="../quiz.html">Is Tyme Boxed for me?</a>
+    <a href="../support.html">Support</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="narrow">
+    <div class="eyebrow">Profile &amp; account</div>
+    <h1 class="display">Your account, <span class="ital">in your hands.</span></h1>
+    <p class="hero-sub">Your Tyme Boxed profile lives inside the app — that's where your streaks, sessions and settings are. This page shows what's stored and how to change or remove any of it.</p>
+
+    <div class="app-panel">
+      <div class="lbl">Where your profile lives</div>
+      <h2>Open the Tyme Boxed app</h2>
+      <span class="big">Profile → Settings</span>
+      <div class="response">Everything on your profile — name, email, focus history, device pairing — is edited from inside the app. There is no separate web login.</div>
+      <div class="panel-actions">
+        <a href="../app.html" class="btn">Get the app →</a>
+        <a href="#manage" class="btn outline">How to manage ↓</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ───── WHAT YOUR PROFILE HOLDS ───── -->
+<section id="whats-stored">
+  <div class="narrow">
+    <div class="section-head">
+      <div class="eyebrow">What's on your profile</div>
+      <h2 class="section-title">Only what the app <span class="ital">needs.</span></h2>
+      <p class="section-sub">Four things, and nothing beyond them. Your focus data stays yours — we never sell it or hand it to advertisers.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card reveal">
+        <div class="ic">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/>
+          </svg>
+        </div>
+        <h3>Your identity</h3>
+        <p>A display name and the email address you signed in with. That's the whole account record — no phone number, no address book, no contacts.</p>
+        <div class="hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Editable in the app, any time
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9"/>
+            <polyline points="12 7 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>Your focus history</h3>
+        <p>Sessions you've completed, their length, and your streak. This is what makes the progress view work — it's a log of timers, not of what you were doing.</p>
+        <div class="hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Resettable without deleting your account
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="6" y="2" width="12" height="20" rx="2"/>
+            <line x1="11" y1="18" x2="13" y2="18"/>
+          </svg>
+        </div>
+        <h3>Your device &amp; app settings</h3>
+        <p>Which Tyme Boxed device is paired to you, the apps you chose to block, session lengths and notification preferences.</p>
+        <div class="hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Unpair a device from Settings
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/>
+            <line x1="8" y1="11" x2="16" y2="11"/>
+          </svg>
+        </div>
+        <h3>What we never store</h3>
+        <p>No screenshots, no keystrokes, no browsing history, no location trail, and no record of the content inside the apps you block.</p>
+        <div class="hint never">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Detailed in our <a href="../privacy.html" style="color:var(--accent);text-decoration:underline;">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── MANAGE IN THE APP ───── -->
+<section id="manage" style="background: var(--bg-warm);">
+  <div class="narrow">
+    <div class="section-head">
+      <div class="eyebrow">Manage your profile</div>
+      <h2 class="section-title">Three taps, <span class="ital">not a form.</span></h2>
+      <p class="section-sub">Open Tyme Boxed on your phone and everything below is one screen away.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="num">1</div>
+        <div>
+          <h4>Open Profile</h4>
+          <p>Tap the profile icon in the bottom navigation of the Tyme Boxed app.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="num">2</div>
+        <div>
+          <h4>Edit your details</h4>
+          <p>Change your display name, update your email, adjust session lengths, or change which apps get blocked during a session.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="num">3</div>
+        <div>
+          <h4>Manage your device</h4>
+          <p>See the NFC device paired to your account, re-verify it, or unpair it before handing it to someone else.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="num">4</div>
+        <div>
+          <h4>Reset or delete</h4>
+          <p>Clear your focus history from Settings, or remove your account entirely — see the two options below.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── EXPORT / DELETE ───── -->
+<section id="data-requests">
+  <div class="narrow">
+    <div class="section-head">
+      <div class="eyebrow">Your data rights</div>
+      <h2 class="section-title">Take it with you, <span class="ital">or take it down.</span></h2>
+      <p class="section-sub">Under India's DPDP Act you can ask for a copy of your data or have it erased. Either request goes to the same inbox and a person handles it.</p>
+    </div>
+
+    <div class="actions-grid">
+      <div class="action reveal">
+        <div class="tag">Request a copy</div>
+        <h3>Export my data</h3>
+        <p>We'll send a machine-readable file containing everything tied to your account:</p>
+        <ul>
+          <li>Account details (name, email, signup date)</li>
+          <li>Every focus session and streak record</li>
+          <li>Device pairing and app settings</li>
+        </ul>
+        <div class="cta">
+          <a class="btn" href="mailto:support@tymeboxed.app?subject=Data%20export%20request%20%E2%80%94%20Tyme%20Boxed&body=Hi%20Tyme%20Boxed%20team%2C%0A%0AI%27d%20like%20a%20copy%20of%20the%20data%20associated%20with%20my%20account.%0A%0AAccount%20email%3A%20%0A%0AThanks.">Request export →</a>
+          <div class="fine">Sent within 30 days, to the account email only.</div>
+        </div>
+      </div>
+
+      <div class="action danger reveal">
+        <div class="tag">Permanent</div>
+        <h3>Delete my account</h3>
+        <p>Deletion removes your profile and everything listed above from our systems. It cannot be undone.</p>
+        <ul>
+          <li>Your profile, sessions and streaks are erased</li>
+          <li>Your device is unpaired and can be set up fresh</li>
+          <li>Order and invoice records are kept only as long as tax law requires</li>
+        </ul>
+        <div class="cta">
+          <a class="btn accent" href="mailto:support@tymeboxed.app?subject=Account%20deletion%20request%20%E2%80%94%20Tyme%20Boxed&body=Hi%20Tyme%20Boxed%20team%2C%0A%0APlease%20delete%20my%20Tyme%20Boxed%20account%20and%20all%20associated%20data.%0A%0AAccount%20email%3A%20%0A%0AI%20understand%20this%20cannot%20be%20undone.%0A%0AThanks.">Request deletion →</a>
+          <div class="fine">We confirm from the account email first, then delete within 30 days.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── HELPFUL LINKS ───── -->
+<section style="background: var(--bg-warm);">
+  <div class="narrow">
+    <div class="section-head">
+      <div class="eyebrow">Related</div>
+      <h2 class="section-title">Where to go <span class="ital">next.</span></h2>
+    </div>
+
+    <div class="links-row">
+      <a class="link-card" href="../support.html">
+        <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 4"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg></div>
+        <h4>Support</h4>
+        <p>Orders, returns, warranty and device troubleshooting.</p>
+        <span class="go">Get help →</span>
+      </a>
+      <a class="link-card" href="../privacy.html">
+        <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/></svg></div>
+        <h4>Privacy Policy</h4>
+        <p>What we collect, what we never collect, and your DPDPA rights.</p>
+        <span class="go">Read policy →</span>
+      </a>
+      <a class="link-card" href="../terms.html">
+        <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <h4>Terms of Service</h4>
+        <p>The agreement covering hardware, software and warranty.</p>
+        <span class="go">Read terms →</span>
+      </a>
+      <a class="link-card" href="../index.html#how">
+        <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h4>How it works</h4>
+        <p>The 3-step setup. Pick, start, tap to unlock.</p>
+        <span class="go">See how →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo"><img src="../images/B1.png" alt="Tyme Boxed" /></div>
+        <p class="muted" style="margin-top: 14px; font-size: 14px; max-width: 280px;">A small device for a quieter mind.</p>
+        <a class="app-badge" href="https://apps.apple.com/in/app/tyme-boxed/id6759287522">
+          <img src="../images/app.png" alt="Download on the App Store">
+        </a>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <a href="../index.html">Home</a>
+        <a href="../science.html">The Science</a>
+        <a href="../quiz.html">Is Tyme Boxed for me?</a>
+        <a href="../preorder.html">Order</a>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <a href="../support.html">Help center</a>
+        <a href="./">Profile &amp; account</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms of Service</a>
+      </div>
+      <div>
+        <h5>Follow</h5>
+        <a href="https://www.linkedin.com/company/tyme-boxed/">LinkedIn</a>
+        <a href="https://www.instagram.com/tyme_boxed">Instagram</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Tyme Boxed. All rights reserved.</span>
+      <span><a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<button type="button" class="cart-fab" id="cart-fab" aria-label="Open cart">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <path d="M6 6h15l-1.5 9h-12z"/>
+    <path d="M6 6L5 3H2"/>
+    <circle cx="9" cy="20" r="1"/>
+    <circle cx="18" cy="20" r="1"/>
+  </svg>
+  <span class="cart-fab-count" id="cart-fab-count">1</span>
+</button>
+<script src="../cart.js"></script>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Mobile menu
+  (function(){
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('mobileMenu');
+    const backdrop = document.getElementById('menuBackdrop');
+    const close = document.querySelector('.menu-close');
+    function open() { menu.classList.add('open'); backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function shut() { menu.classList.remove('open'); backdrop.classList.remove('open'); document.body.style.overflow = ''; }
+    toggle.addEventListener('click', open);
+    close.addEventListener('click', shut);
+    backdrop.addEventListener('click', shut);
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
+  })();
+</script>
+</body>
+</html>
